@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
-const localTodoList = localStorage.getItem("todoList") ? JSON.parse(localStorage.getItem("todoList")):[];
-
 export default function App() {
 
-const [todoList, setTodoList] = useState(localTodoList);
+
+const [todoList, setTodoList] = useState([]);
+
+
+
+
 const [value, setValue] = useState("");
 
 const btnSubmit =(e) => {
@@ -18,21 +21,12 @@ const btnSubmit =(e) => {
     completed: false
   }
 
-if(value.trim().length !== 0) {
   setTodoList(prev =>  [...prev, newTodo])
-  localStorage.setItem('todoList', JSON.stringify([...todoList, newTodo]));
   setValue("");
-} else {
-  alert("해야 할 일을 입력하세요");
-}
-
-
-  
 }
 
 const deleteAll = () => {
   setTodoList([]);
-  localStorage.setItem('todoList', JSON.stringify([]));
 }
 
 
